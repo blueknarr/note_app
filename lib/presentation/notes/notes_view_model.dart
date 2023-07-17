@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
 import 'package:note_app/domain/repository/note_repository.dart';
+import 'package:note_app/presentation/notes/notes_state.dart';
 
 import '../../domain/model/note.dart';
 import 'notes_event.dart';
@@ -9,12 +10,13 @@ import 'notes_event.dart';
 class NotesViewModel with ChangeNotifier {
   final NoteRepository repository;
 
-  NotesViewModel(this.repository);
+  NotesState _state = NotesState();
 
-  List<Note> _notes = [];
-  UnmodifiableListView<Note> get notes => UnmodifiableListView(_notes);
+  NotesState get state => _state;
 
   Note? _recentlyDeletedNote;
+
+  NotesViewModel(this.repository);
 
   void onEvent(NotesEvent event) {
     event.when(
@@ -26,7 +28,7 @@ class NotesViewModel with ChangeNotifier {
 
   Future<void> _loadNotes() async {
     List<Note> notes = await repository.getNotes();
-    _notes = notes;
+    _state = state.copyWith(notes: notes);
     notifyListeners();
   }
 
