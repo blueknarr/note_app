@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/ui/colors.dart';
 
 import '../../../domain/model/note.dart';
 
@@ -32,7 +33,10 @@ class NoteItem extends StatelessWidget {
                   note.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .apply(color: darkGray),
                 ),
                 const SizedBox(
                   height: 8,
@@ -41,7 +45,9 @@ class NoteItem extends StatelessWidget {
                   note.content,
                   maxLines: 10,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall,
+                  style: Theme.of(context).textTheme.bodySmall!.apply(
+                        color: darkGray,
+                      ),
                 ),
               ],
             ),
