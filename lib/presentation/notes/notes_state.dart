@@ -11,5 +11,6 @@ class NotesState with _$NotesState {
   const factory NotesState({
     @Default([]) List<Note> notes,
     required NoteOrder noteOrder,
+    required bool isOrderSectionVisible,
   }) = _NotesState;
 }
